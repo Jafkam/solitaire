@@ -1,5 +1,3 @@
-
-
 .canvas {
   display: flex;
   align-items: center;
@@ -7,7 +5,6 @@
   justify-content: center;
   height: 1087px;
   overflow-y: hidden;
-  
 }
 
 .game-size {
@@ -29,7 +26,7 @@
   justify-content: center;
   align-content: center;
   flex-direction: column;
-  margin-top: 550px
+  margin-top: 550px;
 }
 
 .game {
@@ -43,15 +40,14 @@
   height: 40px; /* here configure as your needs */
 }
 
-.containers {
-  /* display: flex; */
-}
+/* .containers {
+  display: flex; */
+
 .Card-Container {
   display: flex;
 }
 
 .ace-container {
- 
   display: flex;
   justify-content: flex-end;
 
@@ -59,13 +55,11 @@
 }
 
 #deck {
-
   background-color: lightblue;
   cursor: pointer;
 }
 
 #ace {
-
   background-color: #31b94d;
   font-size: 30pt;
   justify-content: center;
@@ -79,7 +73,6 @@
 }
 
 .Card {
-  
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -112,14 +105,11 @@
   /* background-repeat: no-repeat; */
   position: relative;
   background-color: lightblue;
-  
 }
 
 .flipped {
   position: relative;
   cursor: pointer;
-  
-
 }
 
 .selected {
@@ -152,4 +142,3 @@
 .♣️ {
   color: black;
 }
-
