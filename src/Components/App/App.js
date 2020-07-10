@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-
 import Solitaire from "../Solitare/Solitaire";
 import Landing from "../Landing/Landing";
 
