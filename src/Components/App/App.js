@@ -4,6 +4,11 @@ import Solitaire from "../Solitare/Solitaire";
 import Landing from "../Landing/Landing";
 
 class App extends React.Component {
+
+
+
+
+  
   render() {
     return (
       <BrowserRouter>
