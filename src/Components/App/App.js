@@ -113,8 +113,8 @@ class App extends React.Component {
       {
         values: values,
         deck: deck,
-      }
-      // this.shuffle()
+      },
+      this.shuffle()
     );
   };
 
