@@ -21,10 +21,10 @@ class Cards extends React.Component {
         <div className="game" onClick={newGame}>
           New Game
         </div>
-        <div className="cardContainer">
+        <div className="card-container">
           <div onClick={deckClick} className={`card`} id="deck"></div>
           {index === -1 ? (
-            <div className="blank"></div>
+            <div className="empty-array"></div>
           ) : (
             <div
               onClick={deckCard}
@@ -33,11 +33,11 @@ class Cards extends React.Component {
                         ${card.selected ? "selected" : ""}`}
               key={card.id}
             >
-              <div>{card.Display}</div>
-              <div className={card.Suit}>{card.Suit}</div>
+              <div>{card.display}</div>
+              <div className={card.suit}>{card.suit}</div>
             </div>
           )}
-          <div className="aceContainer">
+          <div className="ace-container">
             {topCards.map((column, columnIndex) => {
               return (
                 <>
@@ -60,13 +60,13 @@ class Cards extends React.Component {
                                                 : ""
                                             }
                                             `}
-                      id="topcards"
+                      id="top-cards"
                     >
-                      <div className={column[column.length - 1].Value}>
-                        {column[column.length - 1].Display}
+                      <div className={column[column.length - 1].value}>
+                        {column[column.length - 1].display}
                       </div>
-                      <div className={column[column.length - 1].Suit}>
-                        {column[column.length - 1].Suit}
+                      <div className={column[column.length - 1].suit}>
+                        {column[column.length - 1].suit}
                       </div>
                     </div>
                   )}
@@ -81,7 +81,7 @@ class Cards extends React.Component {
             // Then iterate through each column and row on that column
             dealtCards.map((column, columnIndex) => {
               return (
-                <div>
+                <div className={`total-height`}>
                   {column.length === 0 && (
                     <div
                       className="card blue"
@@ -90,38 +90,39 @@ class Cards extends React.Component {
                   )}
                   {column.map((card, rowIndex) => {
                     return (
-                      <div>
+                      <div
+                        onClick={() => selected(columnIndex, rowIndex)}
+                        className={` flipped
+                                            `}
+                        style={{ top: `${rowIndex * -100}px` }}
+                      >
                         {/* Checks if Card is flipped and if true prints the cards Suit and Value */}
                         {card.flipped ? (
-                          <div onClick={() => selected(columnIndex, rowIndex)}>
+                          <div>
                             {/* Checks the card's colour, if red, prints Hearts and Diamonds, if false, prints clubs and spades */}
-                            {card.Colour === "red" ? (
+                            {card.colour === "red" ? (
                               <div
-                                className={`card
-                                            flipped
-                                            ${card.selected ? "selected" : ""}
-                                            `}
-                                style={{ top: `${rowIndex * -100}px` }}
+                                className={`card ${
+                                  card.selected ? "selected" : ""
+                                }`}
                                 key={card.id}
                               >
-                                <div className={card.Display}>
-                                  {card.Display}
+                                <div className={card.display}>
+                                  {card.display}
                                 </div>
-                                <div className={card.Suit}>{card.Suit}</div>
+                                <div className={card.suit}>{card.suit}</div>
                               </div>
                             ) : (
                               <div
-                                className={`card
-                                            flipped
-                                            ${card.selected ? "selected" : ""}
-                                            `}
-                                style={{ top: `${rowIndex * -100}px` }}
+                                className={`card ${
+                                  card.selected ? "selected" : ""
+                                }`}
                                 key={card.id}
                               >
-                                <div className={card.Display}>
-                                  {card.Display}
+                                <div className={card.display}>
+                                  {card.display}
                                 </div>
-                                <div className={card.Suit}>{card.Suit}</div>
+                                <div className={card.suit}>{card.suit}</div>
                               </div>
                             )}
                           </div>
@@ -129,9 +130,8 @@ class Cards extends React.Component {
                           // If it's not flipped the notFlipped clasname is used and the values and suit is hudden
                           <div
                             className={` card ${
-                              card.flipped ? "flipped" : "notFlipped"
+                              card.flipped ? "flipped" : "not-flipped"
                             }`}
-                            style={{ top: `${rowIndex * -100}px` }}
                             key={card.id}
                           ></div>
                         )}

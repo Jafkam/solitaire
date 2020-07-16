@@ -1,0 +1,19 @@
+.canvas {
+    display: flex;
+    align-items: center;
+    background-color: limegreen;
+    justify-content: center;
+    height: 1087px;
+    overflow-y: hidden;
+  }
+  
+  .game-size {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: #31b94d;
+    width: 1000px;
+    height: 70%;
+    border-radius: 25px;
+  }
+  
