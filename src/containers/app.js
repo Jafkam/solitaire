@@ -1,5 +1,6 @@
 import React from "react";
 import Cards from "../components/cards/cards";
+import { SUITS, RANK } from "../constants";
 import "./app.css";
 
 class App extends React.Component {
@@ -24,27 +25,22 @@ class App extends React.Component {
     };
   }
 
-  // The deck Function is used to loop through the each element in the suits deckay and and asssign each element
-  // rank deck to each suit.
+  // The deck Function is used to loop through the each element in the SUITS deck and asssign objects each element
 
   deck = () => {
     const deck = this.state.deck;
-    const redSuits = ["♦️", "♥️"];
-    const blackSuits = ["♣️", "♠️"];
-    const suits = [...redSuits, ...blackSuits];
-    const rank = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-    for (let i = 0; i < suits.length; i++) {
+    for (let i = 0; i < SUITS.length; i++) {
       let colour;
-      if (suits[i] === "♦️" || suits[i] === "♥️") {
+      if (SUITS[i] === "♦️" || SUITS[i] === "♥️") {
         colour = "red";
       } else {
         colour = "black";
       }
-      for (let x = 0; x < rank.length; x++) {
+      for (let x = 0; x < RANK.length; x++) {
         let card = {
-          suit: suits[i],
-          rank: rank[x],
-          display: rank[x],
+          suit: SUITS[i],
+          rank: RANK[x],
+          display: RANK[x],
           colour,
         };
         deck.push(card);
@@ -72,12 +68,15 @@ class App extends React.Component {
       item.id = index + 1;
     });
 
-    this.setState({
-      deck,
-    }, this.shuffle());
+    this.setState(
+      {
+        deck,
+      },
+      this.shuffle()
+    );
   };
 
-  // handleClick contains a counter and changes the top card when clicked
+  // handleClick contains a counter that changes the top card when clicked
 
   handleClick = () => {
     let index = this.state.currentCardIndex;
@@ -86,13 +85,13 @@ class App extends React.Component {
     const dealtCardSelected = this.state.dealtCardSelected;
     const topCardSelected = this.state.topCardSelected;
 
-    // Resets selected rank of all cards in the game to false
+    // Resets selected value of all cards in the game to false
 
     deckSelected.selected = false;
     dealtCardSelected.selected = false;
     topCardSelected.selected = false;
 
-    // When the function executes it checks the conition if false it adds one
+    // When the function executes it checks the condition, if false it adds one
 
     if (deck.length - 2 >= index) {
       index++;
@@ -132,7 +131,7 @@ class App extends React.Component {
       dealtCards[i] = [...deck.splice(0, [i + 1])];
     }
 
-    //Changes the flipped rank of the last card in each of cardArr's nested arrays
+    //Changes the flipped rank of the last card in each of dealtCards nested arrays
 
     for (let i = 0; i < dealtCards.length; i++) {
       dealtCards[i][dealtCards[i].length - 1].flipped = true;
@@ -140,6 +139,8 @@ class App extends React.Component {
 
     this.setState({ dealtCards, deck });
   };
+
+  // The acClick function accepts cards to complete the game
 
   aceClick = (columnIndex, cardIndex) => {
     const dealtCards = [...this.state.dealtCards];
@@ -155,7 +156,7 @@ class App extends React.Component {
     let topCardRowIndex = this.state.topCardRowIndex;
     let index = this.state.currentCardIndex;
 
-    // This sets the previous selected car in the foundation pile to false
+    // This sets the previous selected card in the foundation pile to false
 
     for (let i = 0; i < topCards.length; i++) {
       for (let j = 0; j < topCards[i].length; j++) {
@@ -165,7 +166,7 @@ class App extends React.Component {
       }
     }
 
-    //Ensures only the ace card cannot be selected
+    //Ensures the first card to be added onto the top pile is the Ace
 
     if (
       typeof topCardSelected !== "undefined" &&
@@ -177,7 +178,7 @@ class App extends React.Component {
       topCardRowIndex = cardIndex;
     }
 
-    // This if statement removes a cas=rd from the dealtCVards array and pushes it into the topCards array
+    // Removes a card from the dealtCaards array and pushes it into the topCards array
 
     if (dealtCardSelected.length !== 0) {
       dealtCardSelected.selected = false;
@@ -206,7 +207,7 @@ class App extends React.Component {
       }
     }
 
-    // Used to remove an card form the deck and pass it into the foundation pile
+    // Used to remove a card form the deck and pass it into the topCards array
 
     if (deckSelected.length !== 0) {
       deckSelected.selected = false;
@@ -272,7 +273,7 @@ class App extends React.Component {
           previousSelectedColumnIndex = i;
           previousSelectedRowIndex = j;
           dealtCards[i][j].selected = false;
-          // Loop creates a counter for flipped cards in the selected card's column
+          // Loop creates a counter for flipped cards in the previousDealtCardSelected card's column
           for (
             let i = 0;
             i < dealtCards[previousSelectedColumnIndex].length;
@@ -287,13 +288,12 @@ class App extends React.Component {
     }
 
     dealtCards[columnIndex][rowIndex].selected = true;
-    // DealtCardSelected to be use in the aces function
     dealtCardSelected = dealtCards[columnIndex][rowIndex];
     dealtCardColumnIndex = columnIndex;
     dealtCardRowIndex = rowIndex;
 
-    // Used to move Tableu cards onto other columns
-    // Checks there's a card selected
+    // Used to move dealtCards into other arrays
+    // Checks if a dealtCard is is selected
     if (previousDealtCardSelected.length !== 0) {
       // first condition compares the numerical rank of each card, second checks if each card's colour is different
       if (
@@ -368,8 +368,8 @@ class App extends React.Component {
       topCardSelected: [],
     });
   };
-  // When card from the deck is clicked it changes colour and all the other cards
-  // change back to their original colour.
+
+  // Selected value of deck card changes to true, all other card's selected values change to false
 
   deckCard = (arrayIndex) => {
     let deck = [...this.state.deck];
@@ -377,9 +377,6 @@ class App extends React.Component {
     let deckSelectedIndex = this.state.deckSelectedIndex;
     let topCardSelected = this.state.topCardSelected;
     let dealtCardSelected = this.state.dealtCardSelected;
-
-    // Changes the all the other cards in the deck's selected rank to false
-    // Changes the selected rank of deck card clicked on to true, causing it to change colour
 
     deckSelected = deck[arrayIndex];
     deckSelected.selected = true;
@@ -394,6 +391,8 @@ class App extends React.Component {
       dealtCardSelected: [],
     });
   };
+
+  // If an array is empty, this function will check if the selected card to be moved is a King
 
   handleKingsClick = (arrayIndex) => {
     let dealtCardSelected = this.state.dealtCardSelected;
@@ -442,36 +441,24 @@ class App extends React.Component {
     this.dealCards();
   };
 
+  // Refreshes the page, starts a new game
   newGame = () => {
     window.location.reload(false);
   };
 
   render() {
-    const {
-      suits,
-      rank,
-      currentCardIndex,
-      deck,
-      dealtCards,
-      aceSpadeSelected,
-      topCards,
-    } = this.state;
+    const { currentCardIndex, deck, dealtCards, topCards } = this.state;
 
     return (
       <div className="canvas">
         <div className="game-size">
           <Cards
-            deck={deck}
             index={currentCardIndex}
             card={deck[currentCardIndex]}
-            suit={suits}
-            rank={rank}
             dealtCards={dealtCards}
             deckClick={this.handleClick}
             selected={this.handleDealtCardsClick}
             deckCard={() => this.deckCard(currentCardIndex)}
-            aceSpadeClick={() => this.handleSpdesAceClick(currentCardIndex)}
-            aceSpadeSelected={aceSpadeSelected}
             kingsColumn={this.handleKingsClick}
             topCards={topCards}
             aceClick={this.aceClick}

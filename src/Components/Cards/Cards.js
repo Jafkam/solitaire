@@ -40,7 +40,7 @@ class Cards extends React.Component {
           <div className="ace-container">
             {topCards.map((column, columnIndex) => {
               return (
-                <>
+                <div key={columnIndex}>
                   {column.length === 0 ? (
                     <div
                       className="card "
@@ -70,78 +70,69 @@ class Cards extends React.Component {
                       </div>
                     </div>
                   )}
-                </>
+                </div>
               );
             })}
           </div>
         </div>
         <div className="total">
-          {
-            // A 2D array requires two maps, first to go across the column, second against the row.
-            // Then iterate through each column and row on that column
-            dealtCards.map((column, columnIndex) => {
-              return (
-                <div className={`total-height`}>
-                  {column.length === 0 && (
+          {/* 2D array maps throught the 2D dealtCards array to display the cards */}
+          {dealtCards.map((column, columnIndex) => {
+            return (
+              <div className={`total-height`} key={columnIndex}>
+                {column.length === 0 && (
+                  <div
+                    className="card blue"
+                    onClick={() => kingsColumn(columnIndex)}
+                  ></div>
+                )}
+                {column.map((card, rowIndex) => {
+                  return (
                     <div
-                      className="card blue"
-                      onClick={() => kingsColumn(columnIndex)}
-                    ></div>
-                  )}
-                  {column.map((card, rowIndex) => {
-                    return (
-                      <div
-                        onClick={() => selected(columnIndex, rowIndex)}
-                        className={` flipped
+                      key={rowIndex}
+                      onClick={() => selected(columnIndex, rowIndex)}
+                      className={` flipped
                                             `}
-                        style={{ top: `${rowIndex * -100}px` }}
-                      >
-                        {/* Checks if Card is flipped and if true prints the cards Suit and Value */}
-                        {card.flipped ? (
-                          <div>
-                            {/* Checks the card's colour, if red, prints Hearts and Diamonds, if false, prints clubs and spades */}
-                            {card.colour === "red" ? (
-                              <div
-                                className={`card ${
-                                  card.selected ? "selected" : ""
-                                }`}
-                                key={card.id}
-                              >
-                                <div className={card.display}>
-                                  {card.display}
-                                </div>
-                                <div className={card.suit}>{card.suit}</div>
-                              </div>
-                            ) : (
-                              <div
-                                className={`card ${
-                                  card.selected ? "selected" : ""
-                                }`}
-                                key={card.id}
-                              >
-                                <div className={card.display}>
-                                  {card.display}
-                                </div>
-                                <div className={card.suit}>{card.suit}</div>
-                              </div>
-                            )}
-                          </div>
-                        ) : (
-                          // If it's not flipped the notFlipped clasname is used and the values and suit is hudden
-                          <div
-                            className={` card ${
-                              card.flipped ? "flipped" : "not-flipped"
-                            }`}
-                            key={card.id}
-                          ></div>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              );
-            })
-          }
+                      style={{ top: `${rowIndex * -100}px` }}
+                    >
+                      {/* Checks if Card is flipped and if true prints the cards Suit and Value */}
+                      {card.flipped ? (
+                        <div>
+                          {/* Checks the card's colour, if red, prints Hearts and Diamonds, if false, prints clubs and spades */}
+                          {card.colour === "red" ? (
+                            <div
+                              className={`card ${
+                                card.selected ? "selected" : ""
+                              }`}
+                            >
+                              <div className={card.display}>{card.display}</div>
+                              <div className={card.suit}>{card.suit}</div>
+                            </div>
+                          ) : (
+                            <div
+                              className={`card ${
+                                card.selected ? "selected" : ""
+                              }`}
+                            >
+                              <div className={card.display}>{card.display}</div>
+                              <div className={card.suit}>{card.suit}</div>
+                            </div>
+                          )}
+                        </div>
+                      ) : (
+                        // If it's not flipped the notFlipped clasname is used and the values and suit is hudden
+                        <div
+                          className={` card ${
+                            card.flipped ? "flipped" : "not-flipped"
+                          }`}
+                        ></div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
         </div>
       </div>
     );
