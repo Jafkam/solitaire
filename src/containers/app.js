@@ -4,26 +4,23 @@ import { SUITS, RANK } from "../constants";
 import "./app.css";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      deck: [],
-      currentCardIndex: -1,
-      dealtCards: [],
-      previousDealtCardSelected: [],
-      previousSelectedColumnIndex: [],
-      previousSelectedRowIndex: [],
-      deckSelected: [],
-      deckSelectedIndex: [],
-      dealtCardSelected: [],
-      dealtCardColumnIndex: [],
-      dealtCardRowIndex: [],
-      topCards: [[], [], [], []],
-      topCardSelected: [],
-      topCardColumnIndex: [],
-      topCardRowIndex: [],
-    };
-  }
+  state = {
+    deck: [],
+    currentCardIndex: -1,
+    dealtCards: [],
+    previousDealtCardSelected: [],
+    previousSelectedColumnIndex: [],
+    previousSelectedRowIndex: [],
+    deckSelected: [],
+    deckSelectedIndex: [],
+    dealtCardSelected: [],
+    dealtCardColumnIndex: [],
+    dealtCardRowIndex: [],
+    topCards: [[], [], [], []],
+    topCardSelected: [],
+    topCardColumnIndex: [],
+    topCardRowIndex: [],
+  };
 
   // The deck Function is used to loop through the each element in the SUITS deck and asssign objects each element
 
