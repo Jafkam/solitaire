@@ -65,12 +65,9 @@ class App extends React.Component {
       item.id = index + 1;
     });
 
-    this.setState(
-      {
-        deck,
-      },
-      this.shuffle()
-    );
+    this.setState({
+      deck,
+    });
   };
 
   // handleClick contains a counter that changes the top card when clicked
@@ -227,6 +224,7 @@ class App extends React.Component {
       if (dealtCards[i].length !== 0) {
         dealtCards[i][dealtCards[i].length - 1].flipped = true;
       }
+      topCardSelected = [];
     }
 
     deckSelected = [];
