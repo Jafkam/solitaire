@@ -1,5 +1,6 @@
 import React from "react";
 import "./cards.css";
+import "../../containers/app.css";
 
 class Cards extends React.Component {
   deckIndex = () => {
@@ -11,13 +12,18 @@ class Cards extends React.Component {
         ) : (
           <div
             onClick={deckCard}
-            className={`card
-                          flipped 
-                        ${card.selected ? "selected" : ""}`}
-            key={card.id}
+            className={`card pointer ${card.selected ? "selected" : ""}`}
           >
-            <div>{card.display}</div>
-            <div className={card.suit}>{card.suit}</div>
+            <div className="card-display">
+              <div>{card.display}</div>
+              <div className={card.suit} id="inverted">
+                {card.suit}
+              </div>
+            </div>
+            <div className="card-display">
+              <div className={card.suit}>{card.suit}</div>
+              <div id="inverted">{card.display}</div>
+            </div>
           </div>
         )}
       </div>
@@ -29,34 +35,30 @@ class Cards extends React.Component {
     return (
       <div className="ace-container">
         {topCards.map((column, columnIndex) => {
+          const lastCard = column[column.length - 1];
           return (
             <div key={columnIndex}>
               {column.length === 0 ? (
                 <div
-                  className="card "
+                  className="card"
                   id="ace"
                   onClick={() => aceClick(columnIndex)}
-                >
-                  A
-                </div>
+                ></div>
               ) : (
                 <div
                   onClick={() => aceClick(columnIndex, column.length - 1)}
-                  className={`card
-                                            
-                                            ${
-                                              column[column.length - 1].selected
-                                                ? "selected"
-                                                : ""
-                                            }
-                                            `}
-                  id="top-cards"
+                  className={`card pointer
+                  ${lastCard.selected ? "selected" : ""}`}
                 >
-                  <div className={column[column.length - 1].value}>
-                    {column[column.length - 1].display}
+                  <div className="card-display">
+                    <div>{lastCard.display}</div>
+                    <div className={lastCard.suit} id="inverted">
+                      {lastCard.suit}
+                    </div>
                   </div>
-                  <div className={column[column.length - 1].suit}>
-                    {column[column.length - 1].suit}
+                  <div className="card-display">
+                    <div className={lastCard.suit}>{lastCard.suit}</div>
+                    <div id="inverted">{lastCard.display}</div>
                   </div>
                 </div>
               )}
@@ -66,6 +68,8 @@ class Cards extends React.Component {
       </div>
     );
   };
+
+  //  2D array maps throught the 2D dealtCards array to display the cards
 
   dealtCards = () => {
     const { dealtCards, kingsColumn, selected } = this.props;
@@ -84,42 +88,31 @@ class Cards extends React.Component {
                 return (
                   <div
                     key={rowIndex}
-                    onClick={() => selected(columnIndex, rowIndex)}
-                    className={` flipped
-                                            `}
+                    className="position"
                     style={{ top: `${rowIndex * -100}px` }}
                   >
                     {/* Checks if Card is flipped and if true prints the cards Suit and Value */}
                     {card.flipped ? (
-                      <div>
-                        {/* Checks the card's colour, if red, prints Hearts and Diamonds, if false, prints clubs and spades */}
-                        {card.colour === "red" ? (
-                          <div
-                            className={`card ${
-                              card.selected ? "selected" : ""
-                            }`}
-                          >
-                            <div className={card.display}>{card.display}</div>
-                            <div className={card.suit}>{card.suit}</div>
+                      <div
+                        className={`card pointer ${
+                          card.selected ? "selected" : ""
+                        }`}
+                        onClick={() => selected(columnIndex, rowIndex)}
+                      >
+                        <div className="card-display">
+                          <div>{card.display}</div>
+                          <div className={card.suit} id="inverted">
+                            {card.suit}
                           </div>
-                        ) : (
-                          <div
-                            className={`card ${
-                              card.selected ? "selected" : ""
-                            }`}
-                          >
-                            <div className={card.display}>{card.display}</div>
-                            <div className={card.suit}>{card.suit}</div>
-                          </div>
-                        )}
+                        </div>
+                        <div className="card-display">
+                          <div className={card.suit}>{card.suit}</div>
+                          <div id="inverted">{card.display}</div>
+                        </div>
                       </div>
                     ) : (
-                      // If it's not flipped the notFlipped clasname is used and the values and suit is hudden
-                      <div
-                        className={` card ${
-                          card.flipped ? "flipped" : "not-flipped"
-                        }`}
-                      ></div>
+                      // If it's not flipped the notFlipped clasname is used and the values and suit is hidden
+                      <div className="card not-flipped"></div>
                     )}
                   </div>
                 );
@@ -135,19 +128,20 @@ class Cards extends React.Component {
     const { deckClick, newGame } = this.props;
 
     return (
-      <div className="containers">
-        <div className="game" onClick={newGame}>
-          New Game
-        </div>
-        <div className="card-container">
-          <div onClick={deckClick} className={`card`} id="deck"></div>
-          <div>{this.deckIndex()}</div>
-          <div className="ace-container">
-            <div>{this.topCards()}</div>
+      <div className="canvas">
+        <div className="containers">
+          <div className="game" onClick={newGame}>
+            New Game
           </div>
+          <div className="card-container">
+            <div onClick={deckClick} className={`card`} id="deck"></div>
+            <div>{this.deckIndex()}</div>
+            <div className="ace-container">
+              <div>{this.topCards()}</div>
+            </div>
+          </div>
+          <div>{this.dealtCards()}</div>
         </div>
-        {/* 2D array maps throught the 2D dealtCards array to display the cards */}
-        <div>{this.dealtCards()}</div>
       </div>
     );
   }

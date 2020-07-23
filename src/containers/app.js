@@ -1,26 +1,28 @@
 import React from "react";
 import Cards from "../components/cards/cards";
 import { SUITS, RANK } from "../constants";
-import "./app.css";
 
 class App extends React.Component {
-  state = {
-    deck: [],
-    currentCardIndex: -1,
-    dealtCards: [],
-    previousDealtCardSelected: [],
-    previousSelectedColumnIndex: [],
-    previousSelectedRowIndex: [],
-    deckSelected: [],
-    deckSelectedIndex: [],
-    dealtCardSelected: [],
-    dealtCardColumnIndex: [],
-    dealtCardRowIndex: [],
-    topCards: [[], [], [], []],
-    topCardSelected: [],
-    topCardColumnIndex: [],
-    topCardRowIndex: [],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      deck: [],
+      currentCardIndex: -1,
+      dealtCards: [],
+      previousDealtCardSelected: [],
+      previousSelectedColumnIndex: [],
+      previousSelectedRowIndex: [],
+      deckSelected: [],
+      deckSelectedIndex: [],
+      dealtCardSelected: [],
+      dealtCardColumnIndex: [],
+      dealtCardRowIndex: [],
+      topCards: [[], [], [], []],
+      topCardSelected: [],
+      topCardColumnIndex: [],
+      topCardRowIndex: [],
+    };
+  }
 
   // The deck Function is used to loop through the each element in the SUITS deck and asssign objects each element
 
@@ -44,7 +46,7 @@ class App extends React.Component {
       }
     }
 
-    deck.forEach((item, index) => {
+    deck.forEach((item) => {
       switch (item.rank) {
         case 1:
           item.display = "A";
@@ -62,12 +64,15 @@ class App extends React.Component {
       }
       item.flipped = false;
       item.selected = false;
-      item.id = index + 1;
+     
     });
 
-    this.setState({
-      deck,
-    });
+    this.setState(
+      {
+        deck,
+      },
+      this.shuffle()
+    );
   };
 
   // handleClick contains a counter that changes the top card when clicked
@@ -215,6 +220,7 @@ class App extends React.Component {
       ) {
         topCards[columnIndex].push(...deck.splice(deckSelectedIndex, 1));
         index--;
+        topCardSelected = [];
       }
     }
 
@@ -224,7 +230,6 @@ class App extends React.Component {
       if (dealtCards[i].length !== 0) {
         dealtCards[i][dealtCards[i].length - 1].flipped = true;
       }
-      topCardSelected = [];
     }
 
     deckSelected = [];
@@ -445,22 +450,18 @@ class App extends React.Component {
     const { currentCardIndex, deck, dealtCards, topCards } = this.state;
 
     return (
-      <div className="canvas">
-        <div className="game-size">
-          <Cards
-            index={currentCardIndex}
-            card={deck[currentCardIndex]}
-            dealtCards={dealtCards}
-            deckClick={this.handleClick}
-            selected={this.handleDealtCardsClick}
-            deckCard={() => this.deckCard(currentCardIndex)}
-            kingsColumn={this.handleKingsClick}
-            topCards={topCards}
-            aceClick={this.aceClick}
-            newGame={this.newGame}
-          />
-        </div>
-      </div>
+      <Cards
+        index={currentCardIndex}
+        card={deck[currentCardIndex]}
+        dealtCards={dealtCards}
+        deckClick={this.handleClick}
+        selected={this.handleDealtCardsClick}
+        deckCard={() => this.deckCard(currentCardIndex)}
+        kingsColumn={this.handleKingsClick}
+        topCards={topCards}
+        aceClick={this.aceClick}
+        newGame={this.newGame}
+      />
     );
   }
 }

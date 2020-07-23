@@ -1,17 +1,22 @@
+.canvas {
+  display: flex;
+}
 
 .game {
   width: 64px;
   text-align: center;
   margin-top: 50px;
-  background-color: lightblue;
+  background-color: rgba(78, 59, 199, 0.817);
   cursor: pointer;
   font-weight: 550;
   height: 40px; /* here configure as your needs */
   transition: all 0.2s;
+  color: white;
 }
 
 .game:active {
   background-color: #f2e394;
+  color: black;
 }
 
 .card-container {
@@ -25,17 +30,14 @@
 }
 
 #deck {
-  background-color: lightblue;
   cursor: pointer;
 }
 
 #ace {
-  background-color: #31b94d;
-  font-size: 30pt;
-  justify-content: center;
-  align-items: center;
-  color: lightgrey;
-  text-shadow: 1px 1px lightgrey;
+  background-image: url("../../images/ace-background");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .total {
@@ -59,17 +61,12 @@
   height: 100px;
   color: blue;
   border: solid 1px #808080;
-  min-width: 64px
+  min-width: 64px;
 }
 
-.not-flipped {
+.not-flipped,
+.position {
   position: relative;
-  background-color: lightblue;
-}
-
-.flipped {
-  position: relative;
-  cursor: pointer;
 }
 
 .selected {
@@ -80,27 +77,11 @@
 .blue {
   background-color: blue;
 }
-.deck-card {
-  cursor: pointer;
-}
-
-#top-cards {
-  cursor: pointer;
-}
 
 .♥️,
 .♦️ {
-  color: red;
-}
-#dealt {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-}
-
-.♠️,
-.♣️ {
-  color: black;
+  color: rgba(227, 30, 30, 0.948);
+  /* margin-bottom: 40px;` */
 }
 
 .game,
@@ -116,6 +97,27 @@
   padding: 10px;
 }
 .total-height {
-  max-height:1px;
+  max-height: 1px;
+}
 
+.pointer {
+  cursor: pointer;
+}
+
+#deck,
+.not-flipped {
+  background-image: url("../../images/playing-card-back.jpg");
+  background-size: contain;
+  background-position: center;
+}
+
+#inverted {
+  transform: rotate(180deg);
+}
+
+.card-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
