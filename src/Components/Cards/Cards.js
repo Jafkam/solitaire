@@ -89,7 +89,7 @@ class Cards extends React.Component {
                   <div
                     key={rowIndex}
                     className="position"
-                    style={{ top: `${rowIndex * -100}px` }}
+                    style={{ top: `${rowIndex * -110}px` }}
                   >
                     {/* Checks if Card is flipped and if true prints the cards Suit and Value */}
                     {card.flipped ? (

@@ -54,12 +54,11 @@
   border: solid 1px #808080;
   background-color: white;
   font-size: 20pt;
-  height: 100px;
+  height: 110px;
 }
 
 .empty-array {
-  height: 100px;
-  color: blue;
+  height: 110px;
   border: solid 1px #808080;
   min-width: 64px;
 }
@@ -81,14 +80,13 @@
 .♥️,
 .♦️ {
   color: rgba(227, 30, 30, 0.948);
-  /* margin-bottom: 40px;` */
 }
 
 .game,
 .card,
 .empty-array {
   margin: 15px;
-  border-radius: 15px;
+  border-radius: 10px;
   box-shadow: 2px 2px 10px grey;
   -webkit-user-select: none; /* Chrome all / Safari all */
   -moz-user-select: none; /* Firefox all */
