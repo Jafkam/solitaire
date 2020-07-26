@@ -64,7 +64,6 @@ class App extends React.Component {
       }
       item.flipped = false;
       item.selected = false;
-     
     });
 
     this.setState(

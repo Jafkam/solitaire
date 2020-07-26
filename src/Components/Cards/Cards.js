@@ -3,12 +3,13 @@ import "./cards.css";
 import "../../containers/app.css";
 
 class Cards extends React.Component {
+  // Generates a new cardwhen the deckCard is clicked.
   deckIndex = () => {
     const { index, deckCard, card } = this.props;
     return (
       <div>
         {index === -1 ? (
-          <div className="empty-array"></div>
+          <div className="empty-array" />
         ) : (
           <div
             onClick={deckCard}
@@ -16,6 +17,9 @@ class Cards extends React.Component {
           >
             <div className="card-display">
               <div>{card.display}</div>
+              <div className={card.suit} id="block">
+                {card.suit}
+              </div>
               <div className={card.suit} id="inverted">
                 {card.suit}
               </div>
@@ -30,35 +34,54 @@ class Cards extends React.Component {
     );
   };
 
+  // Generates four empty columns where cards can be added
+
   topCards = () => {
     const { topCards, aceClick } = this.props;
     return (
       <div className="ace-container">
         {topCards.map((column, columnIndex) => {
-          const lastCard = column[column.length - 1];
+          const card = column[column.length - 1];
           return (
             <div key={columnIndex}>
               {column.length === 0 ? (
                 <div
                   className="card"
-                  id="ace"
+                  id="suits"
                   onClick={() => aceClick(columnIndex)}
-                ></div>
+                >
+                  <span className="♥️" role="img" aria-label="Heart">
+                    ♥️
+                  </span>
+
+                  <span role="img" aria-label="Club">
+                    ♣️
+                  </span>
+                  <span role="img" aria-label="Spade">
+                    ♠️
+                  </span>
+                  <span className="♦️" role="img" aria-label="Diamond">
+                    ♦️
+                  </span>
+                </div>
               ) : (
                 <div
                   onClick={() => aceClick(columnIndex, column.length - 1)}
                   className={`card pointer
-                  ${lastCard.selected ? "selected" : ""}`}
+                  ${card.selected ? "selected" : ""}`}
                 >
                   <div className="card-display">
-                    <div>{lastCard.display}</div>
-                    <div className={lastCard.suit} id="inverted">
-                      {lastCard.suit}
+                    <div>{card.display}</div>
+                    <div className={card.suit} id="block">
+                      {card.suit}
+                    </div>
+                    <div className={card.suit} id="inverted">
+                      {card.suit}
                     </div>
                   </div>
                   <div className="card-display">
-                    <div className={lastCard.suit}>{lastCard.suit}</div>
-                    <div id="inverted">{lastCard.display}</div>
+                    <div className={card.suit}>{card.suit}</div>
+                    <div id="inverted">{card.display}</div>
                   </div>
                 </div>
               )}
@@ -101,6 +124,9 @@ class Cards extends React.Component {
                       >
                         <div className="card-display">
                           <div>{card.display}</div>
+                          <div className={card.suit} id="block">
+                            {card.suit}
+                          </div>
                           <div className={card.suit} id="inverted">
                             {card.suit}
                           </div>
@@ -134,7 +160,7 @@ class Cards extends React.Component {
             New Game
           </div>
           <div className="card-container">
-            <div onClick={deckClick} className={`card`} id="deck"></div>
+            <div onClick={deckClick} className={`card pointer deck`} />
             <div>{this.deckIndex()}</div>
             <div className="ace-container">
               <div>{this.topCards()}</div>

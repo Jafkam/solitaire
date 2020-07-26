@@ -4,8 +4,8 @@
 
 .game {
   width: 64px;
+  padding: 10px;
   text-align: center;
-  margin-top: 50px;
   background-color: rgba(78, 59, 199, 0.817);
   cursor: pointer;
   font-weight: 550;
@@ -23,44 +23,70 @@
   display: flex;
 }
 
+#block {
+  position: relative;
+  font-size: 45px;
+  left: 22px;
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  min-width: 84px;
+  min-height: 130px;
+  border: solid 1px #808080;
+  background-color: white;
+  font-size: 25pt;
+  font-weight: 540;
+}
+
+.empty-array {
+  height: 130px;
+  min-width: 84px;
+  border: solid 1px #808080;
+}
+.game,
+.card,
+.empty-array {
+  margin: 15px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px grey;
+  -webkit-user-select: none; /* Chrome all / Safari all */
+  -moz-user-select: none; /* Firefox all */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none;
+}
+#suits {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 30pt;
+  max-width: 84px;
+  max-height: 130px;
+}
+#inverted {
+  transform: rotate(180deg);
+}
+
 .ace-container {
   display: flex;
   justify-content: flex-end;
   width: 100%;
 }
 
-#deck {
-  cursor: pointer;
-}
-
-#ace {
-  background-image: url("../../images/ace-background");
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
+.card-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .total {
   display: flex;
   justify-content: center;
   align-content: center;
-}
-
-.card {
-  min-width: 64px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  border: solid 1px #808080;
-  background-color: white;
-  font-size: 20pt;
-  height: 110px;
-}
-
-.empty-array {
-  height: 110px;
-  border: solid 1px #808080;
-  min-width: 64px;
 }
 
 .not-flipped,
@@ -82,18 +108,6 @@
   color: rgba(227, 30, 30, 0.948);
 }
 
-.game,
-.card,
-.empty-array {
-  margin: 15px;
-  border-radius: 10px;
-  box-shadow: 2px 2px 10px grey;
-  -webkit-user-select: none; /* Chrome all / Safari all */
-  -moz-user-select: none; /* Firefox all */
-  -ms-user-select: none; /* IE 10+ */
-  user-select: none;
-  padding: 10px;
-}
 .total-height {
   max-height: 1px;
 }
@@ -102,20 +116,10 @@
   cursor: pointer;
 }
 
-#deck,
+.deck,
 .not-flipped {
   background-image: url("../../images/playing-card-back.jpg");
-  background-size: contain;
   background-position: center;
 }
 
-#inverted {
-  transform: rotate(180deg);
-}
 
-.card-display {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-}
