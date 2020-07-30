@@ -25,8 +25,7 @@
 
 #block {
   position: relative;
-  font-size: 45px;
-  left: 22px;
+  left: 25px;
 }
 
 .card {
@@ -81,6 +80,7 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+  width: 32px;
 }
 
 .total {
