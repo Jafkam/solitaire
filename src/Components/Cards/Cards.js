@@ -7,7 +7,7 @@ class Cards extends React.Component {
   deckIndex = () => {
     const { index, deckCard, card } = this.props;
     return (
-      <div>
+      <React.Fragment>
         {index === -1 ? (
           <div className="empty-array" />
         ) : (
@@ -15,7 +15,7 @@ class Cards extends React.Component {
             onClick={deckCard}
             className={`card pointer ${card.selected ? "selected" : ""}`}
           >
-            <div className="card-display">
+            <div className="card__display">
               <div>{card.display}</div>
               <div className={card.suit} id="block">
                 {card.suit}
@@ -24,13 +24,13 @@ class Cards extends React.Component {
                 {card.suit}
               </div>
             </div>
-            <div className="card-display">
+            <div className="card__display">
               <div className={card.suit}>{card.suit}</div>
               <div id="inverted">{card.display}</div>
             </div>
           </div>
         )}
-      </div>
+      </React.Fragment>
     );
   };
 
@@ -70,7 +70,7 @@ class Cards extends React.Component {
                   className={`card pointer
                   ${card.selected ? "selected" : ""}`}
                 >
-                  <div className="card-display">
+                  <div className="card__display">
                     <div>{card.display}</div>
                     <div className={card.suit} id="block">
                       {card.suit}
@@ -79,7 +79,7 @@ class Cards extends React.Component {
                       {card.suit}
                     </div>
                   </div>
-                  <div className="card-display">
+                  <div className="card__display">
                     <div className={card.suit}>{card.suit}</div>
                     <div id="inverted">{card.display}</div>
                   </div>
@@ -100,7 +100,7 @@ class Cards extends React.Component {
       <div className="total">
         {dealtCards.map((column, columnIndex) => {
           return (
-            <div className={`total-height`} key={columnIndex}>
+            <div className={`total__height`} key={columnIndex}>
               {column.length === 0 && (
                 <div
                   className="card blue"
@@ -122,7 +122,7 @@ class Cards extends React.Component {
                         }`}
                         onClick={() => selected(columnIndex, rowIndex)}
                       >
-                        <div className="card-display">
+                        <div className="card__display">
                           <div>{card.display}</div>
                           <div className={card.suit} id="block">
                             {card.suit}
@@ -131,7 +131,7 @@ class Cards extends React.Component {
                             {card.suit}
                           </div>
                         </div>
-                        <div className="card-display">
+                        <div className="card__display">
                           <div className={card.suit}>{card.suit}</div>
                           <div id="inverted">{card.display}</div>
                         </div>
@@ -155,8 +155,8 @@ class Cards extends React.Component {
 
     return (
       <div className="canvas">
-        <div className="containers">
-          <div className="game" onClick={newGame}>
+        <div className="canvas__containers">
+          <div className="canvas__game" onClick={newGame}>
             New Game
           </div>
           <div className="card-container">
