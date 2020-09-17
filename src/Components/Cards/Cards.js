@@ -7,7 +7,7 @@ class Cards extends React.Component {
   deckIndex = () => {
     const { index, deckCard, card } = this.props;
     return (
-      <React.Fragment>
+      <>
         {index === -1 ? (
           <div className="empty-array" />
         ) : (
@@ -30,7 +30,7 @@ class Cards extends React.Component {
             </div>
           </div>
         )}
-      </React.Fragment>
+    </>
     );
   };
 
@@ -46,21 +46,21 @@ class Cards extends React.Component {
             <div key={columnIndex}>
               {column.length === 0 ? (
                 <div
-                  className="card"
-                  id="suits"
+                  className="card ace-container__suits"
+                  
                   onClick={() => aceClick(columnIndex)}
                 >
-                  <span className="♥️" role="img" aria-label="Heart">
+                  <span className="ace-container__♥️" role="img" aria-label="Heart">
                     ♥️
                   </span>
 
-                  <span role="img" aria-label="Club">
+                  <span className="ace-container__♣️" role="img" aria-label="Club">
                     ♣️
                   </span>
-                  <span role="img" aria-label="Spade">
+                  <span className="ace-container__♠️" role="img" aria-label="Spade">
                     ♠️
                   </span>
-                  <span className="♦️" role="img" aria-label="Diamond">
+                  <span className="ace-container__♦️" role="img" aria-label="Diamond">
                     ♦️
                   </span>
                 </div>

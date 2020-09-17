@@ -6,17 +6,21 @@
   width: 64px;
   padding: 10px;
   text-align: center;
-  background-color: rgba(78, 59, 199, 0.817);
+  background-color: rgba(78, 59, 199, 0.568);
   cursor: pointer;
   font-weight: 550;
   height: 40px; /* here configure as your needs */
   transition: all 0.2s;
   color: white;
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+
 }
 
 .canvas__game:active {
-  background-color: #f2e394;
+  background-color: #f2e294;
   color: black;
+  /* transition: all 0.2s; */
 }
 
 .card-container {
@@ -35,8 +39,9 @@
   min-height: 130px;
   border: solid 1px #808080;
   background-color: white;
-  font-size: 25pt;
-  font-weight: 540;
+  font-size: 28px;
+  font-weight: 600;
+  font-family: "Playfair Display", serif;
 }
 
 .empty-array {
@@ -49,18 +54,18 @@
 .empty-array {
   margin: 15px;
   border-radius: 10px;
-  box-shadow: 2px 2px 10px grey;
-  -webkit-user-select: none; /* Chrome all / Safari all */
-  -moz-user-select: none; /* Firefox all */
-  -ms-user-select: none; /* IE 10+ */
+  box-shadow: 2px 2px 10px rgba(255, 255, 255, 0.815);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
-#suits {
+.ace-container__suits {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  font-size: 30pt;
+  font-size: 25pt;
   max-width: 84px;
   max-height: 130px;
 }
@@ -72,6 +77,16 @@
   display: flex;
   justify-content: flex-end;
   width: 100%;
+}
+
+.ace-container__♥️,
+.ace-container__♠️ {
+  margin-left: 2px;
+}
+
+.ace-container__♣️,
+.ace-container__♦️ {
+  margin-right: 2px;
 }
 
 .card__display {
@@ -95,7 +110,7 @@
 }
 
 .selected {
-  background-color: #f2e394;
+  background-color: #f2e294;
   transition: all 0.2s;
 }
 
@@ -105,7 +120,7 @@
 
 .♥️,
 .♦️ {
-  color: rgba(227, 30, 30, 0.948);
+  color: rgb(228, 26, 26);
 }
 
 .total__height {
@@ -121,5 +136,3 @@
   background-image: url("../../images/playing-card-back.jpg");
   background-position: center;
 }
-
-
